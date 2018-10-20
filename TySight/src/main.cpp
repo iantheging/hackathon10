@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include "poultrysonic.h"
 #include "Temperature.h"
+#include "vibrator.h"
 
 // defines Poultrysonic pins
 const int trigPin = 9;
@@ -9,6 +10,10 @@ const int echoPin = 10;
 // defines temperature pins
 const int dataPin = A0;
 const int deadPin = A1;
+
+// defines vibration pins
+const int analogInPin = A0;
+const int analogOutPin = 5;
 
 // defines variables
 long duration;
@@ -31,15 +36,19 @@ void loop()
 {
     // Create instance of Poultrysonic
     Poultrysonic ps (trigPin, echoPin);
-    distance = ps.getDistance;
+    distance = ps.getDistance();
 
     // Create instance of temperature
     Temperature temp (dataPin, deadPin);
-    temperature = temp.getTemperature;
+    temperature = temp.getTemperature();
 
-    
+    Vibrator vib (analogInPin, analogOutPin);
+    vib.vibrate(distance);    
 
     // Prints the distance on the Serial Monitor
     Serial.print("Distance: ");
     Serial.println(distance);
+
+    // wait 2 ms to allow analog-to-digital converter to settle
+    delay(2);
 }
