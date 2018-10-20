@@ -16,11 +16,13 @@ class Poultrysonic
     int avgDist;
     int trigPin;
     int echoPin;
+    float temperature;
+    float speedOfSound;
 
   public:
     
     // constructor
-    Poultrysonic(int trigPin, int echoPin);
+    Poultrysonic(int trigPin, int echoPin, float temperature);
 
     // calculates the distance in centimeters
     int getDistance();

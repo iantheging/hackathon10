@@ -1,14 +1,15 @@
 #include <poultrysonic.h>
+#include <temperature.h>
 
-Poultrysonic::Poultrysonic(int trigPin, int echoPin)
+Poultrysonic::Poultrysonic(int trigPin, int echoPin, float temperature)
 {
     this->trigPin = trigPin;
     this->echoPin = echoPin;
+    this->temperature = temperature;
 }
 
 int Poultrysonic::getDistance()
 {
-
     // Clears the trigPin
     digitalWrite(trigPin, LOW);
     delayMicroseconds(2);
@@ -21,8 +22,11 @@ int Poultrysonic::getDistance()
     // Reads the echoPin, returns the sound wave travel time in microseconds
     duration = pulseIn(echoPin, HIGH);
 
-    // Calculating the distance
-    distance = duration * 0.034 / 2;
+    // Calculate the speed of sound based on the temperature
+    speedOfSound = 331 + 0.6 * temperature;
+
+    // Calculate the distance based on the temperature
+    distance = duration * (speedOfSound / 10000.0) / 2.0;
 
     // checks for outliers
     errorCheck();

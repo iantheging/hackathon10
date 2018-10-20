@@ -17,7 +17,7 @@ const int analogOutPin = 5;
 // defines variables
 long duration;
 int distance;
-int temperature;
+float temperature;
 
 void setup()
 {
@@ -28,26 +28,37 @@ void setup()
     // Set Temperature pins
     pinMode(dataPin, INPUT);
 
-    Serial.begin(9600);       // Starts the serial communication
+    Serial.begin(9600); // Starts the serial communication
 }
 
 void loop()
 {
-    // Create instance of Poultrysonic
-    Poultrysonic ps (trigPin, echoPin);
-    distance = ps.getDistance();
 
-    // Create instance of temperature
-    Temperature temp (dataPin, deadPin);
-    temperature = temp.getTemperature();
-
-    Vibrator vib (analogOutPin);
-    vib.vibrate(distance);    
-
+    /*
     // Prints the distance on the Serial Monitor
     Serial.print("Distance: ");
     Serial.println(distance);
+    */
 
-    // wait 2 ms to allow analog-to-digital converter to settle
-    delay(2);
+    Vibrator vib (analogOutPin);
+    vib.vibrate(distance);    
+    // Create instance of Temperature
+    Temperature temp(dataPin, deadPin);
+    temperature = temp.getTemperatureC();
+
+    // Create instance of Poultrysonic
+    Poultrysonic ps(trigPin, echoPin, temperature);
+    distance = ps.getDistance();
+
+    // Prints the distance in the Serial Monitor
+    Serial.print("Distance: ");
+    Serial.println(distance);
+
+    Serial.print("Temperature: ");
+    Serial.println(temperature);
+
+    Serial.println();
+
+    // Delay to make data legible in serial
+    delay(500);
 }
