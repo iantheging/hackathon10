@@ -11,8 +11,7 @@ const int echoPin = 10;
 const int dataPin = A0;
 const int deadPin = A1;
 
-// defines vibration pins
-const int analogInPin = A0;
+// defines vibration pin
 const int analogOutPin = 5;
 
 // defines variables
@@ -42,7 +41,7 @@ void loop()
     Temperature temp (dataPin, deadPin);
     temperature = temp.getTemperature();
 
-    Vibrator vib (analogInPin, analogOutPin);
+    Vibrator vib (analogOutPin);
     vib.vibrate(distance);    
 
     // Prints the distance on the Serial Monitor

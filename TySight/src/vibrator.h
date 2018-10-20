@@ -10,7 +10,7 @@ class Vibrator
     int analogOutPin;
 
   public:
-    Vibrator(int analogInPin, int analogOutPin);
+    Vibrator(int analogOutPin);
 
     void vibrate(int distance);
 };
