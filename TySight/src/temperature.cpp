@@ -13,7 +13,10 @@ int Temperature::getTemperature()
     // Receive analog temp value
     analogVal = analogRead(dataPin);
 
+    // Calculate temperature value in Celcius per the datasheet
     resistance = (float) (1023-analogVal)*10000/analogVal;
     temperature = 1/(log(resistance/10000)/thermistorVal+1/298.15)-273.15;
+
+    return temperature;
 }
 
