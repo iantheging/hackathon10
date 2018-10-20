@@ -39,9 +39,7 @@ void loop()
     Serial.print("Distance: ");
     Serial.println(distance);
     */
-
-    Vibrator vib (analogOutPin);
-    vib.vibrate(distance);    
+  
     // Create instance of Temperature
     Temperature temp(dataPin, deadPin);
     temperature = temp.getTemperatureC();
@@ -49,6 +47,9 @@ void loop()
     // Create instance of Poultrysonic
     Poultrysonic ps(trigPin, echoPin, temperature);
     distance = ps.getDistance();
+
+    Vibrator vib (analogOutPin);
+    vib.vibrate(distance);  
 
     // Prints the distance in the Serial Monitor
     Serial.print("Distance: ");
@@ -60,5 +61,5 @@ void loop()
     Serial.println();
 
     // Delay to make data legible in serial
-    delay(500);
+    delay(2);
 }

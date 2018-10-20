@@ -26,7 +26,7 @@ int Poultrysonic::getDistance()
     speedOfSound = 331 + 0.6 * temperature;
 
     // Calculate the distance based on the temperature
-    distance = duration * (speedOfSound / 10000.0) / 2.0;
+    distance = duration * ((speedOfSound / 10000.0) / 2.0);
 
     // checks for outliers
     errorCheck();
