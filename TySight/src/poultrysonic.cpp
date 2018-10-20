@@ -42,7 +42,7 @@ void Poultrysonic::errorCheck()
     else
     {
         // checks if distance is outside the margin of error
-        if (distance > avgDist + buffer || distance < avgDist - buffer)
+        if (distance > avgDist + buffer || distance < avgDist - buffer || distance > 500)
         {
             distance = avgDist;
         }
