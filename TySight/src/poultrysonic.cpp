@@ -1,5 +1,4 @@
-#include <Arduino.h>
-#include "poultrysonic.h"
+#include <poultrysonic.h>
 
 Poultrysonic::Poultrysonic(int trigPin, int echoPin)
 {

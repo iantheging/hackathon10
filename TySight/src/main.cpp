@@ -34,5 +34,6 @@ void loop()
     Serial.println(distance);
 
     // Updated version
-    
+    Poultrysonic ps (9, 10);
+    distance = ps.getDistance;
 }

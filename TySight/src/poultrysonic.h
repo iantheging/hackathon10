@@ -1,3 +1,5 @@
+#include <Arduino.h>
+
 #ifndef POULTRYSONIC_H
 #define POULTRYSONIC_H
 
