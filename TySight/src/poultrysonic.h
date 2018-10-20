@@ -1,6 +1,30 @@
 #ifndef POULTRYSONIC_H
 #define POULTRYSONIC_H
 
-int getDistance(int trigPin, int echoPin);
+class Poultrysonic
+{
+  private:
+    const int buffer = 20;
+
+    // defines variables
+    long duration;
+    int distance;
+    int count = 0;
+    int distanceArr[10];
+    int avgDist;
+    int trigPin;
+    int echoPin;
+
+  public:
+    
+    // constructor
+    Poultrysonic(int trigPin, int echoPin);
+
+    // calculates the distance in centimeters
+    int getDistance();
+
+    // checks to ensure that distance is not outlier
+    void errorCheck();
+};
 
 #endif
