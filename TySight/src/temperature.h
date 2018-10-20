@@ -20,8 +20,11 @@ class Temperature
     // Constructor
     Temperature(int dataPin, int deadPin);
 
-    // Accessor for temperature
-    int getTemperature();
+    // Accessor for temperature celcius
+    float getTemperatureC();
+
+    // Accessor for temperature fahrenheit 
+    float getTemperatureF();
 };
 
 #endif

@@ -13,7 +13,7 @@ const int deadPin = A1;
 // defines variables
 long duration;
 int distance;
-int temperature;
+float temperature;
 
 void setup()
 {
@@ -31,15 +31,19 @@ void loop()
 {
     // Create instance of Poultrysonic
     Poultrysonic ps (trigPin, echoPin);
-    distance = ps.getDistance;
+    distance = ps.getDistance();
 
     // Create instance of temperature
     Temperature temp (dataPin, deadPin);
-    temperature = temp.getTemperature;
+    temperature = temp.getTemperatureF();
 
-    
-
+    /*
     // Prints the distance on the Serial Monitor
     Serial.print("Distance: ");
     Serial.println(distance);
+    */
+
+    // Prints the temperature in the Serial Monitor
+    Serial.print("Temperature: ");
+    Serial.println(temperature);
 }
