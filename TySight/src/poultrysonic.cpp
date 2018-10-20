@@ -29,7 +29,7 @@ int Poultrysonic::getDistance()
     distance = duration * ((speedOfSound / 10000.0) / 2.0);
 
     // checks for outliers
-    errorCheck();
+    //errorCheck();
 
     return distance;
 }
