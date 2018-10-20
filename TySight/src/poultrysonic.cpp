@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include <poultrysonic.h>
 
 // defines pins numbers
 const int trigPin = 9;
