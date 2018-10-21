@@ -12,7 +12,11 @@ int Button::getButtonPress()
 {
     buttonState = digitalRead(buttonData);
     buttonStateTwo = digitalRead(buttonDataTwo);
-    delay(75);
+    if(buttonState == 0 && buttonStateTwo == 0){
+        return 0;
+    }
+    
+    delay(150);
     if (digitalRead(buttonData) == buttonState && buttonState != 0)
     {
         // Set to "hold button" mode

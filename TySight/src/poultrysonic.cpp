@@ -43,22 +43,7 @@ void Poultrysonic::errorAvoid(int maxDistance){
         distance = maxDistance;
     }
 
-    /*
-    currentDistance = distance;
-    distance = (currentDistance + lastDistance) / 2.0;
-    lastDistance = currentDistance;
-    */
-
-    /*
-    // Fill the deque to take average values
-    if(count < 10){
-        distanceSum += distance;
-        distanceArr[count] = distance;
-        count++;
-    }
-    */
-
-
+    
 }
 
 

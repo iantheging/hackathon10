@@ -10,14 +10,16 @@ class Vibrator
   private:
     int analogOutPinOne;
     int analogOutPinTwo;
+    int topValue;
+    float strength;
 
   public:
 
     Vibrator(int analogOutPinOne, int analogOutPinTwo);
 
-    void vibrate(int distance, int maxDistance, int strengthValue);
+    void vibrate(int distance, int maxDistance, int strengthMax);
 
-    void vibrateAdjust(int strengthValue);
+    void vibrateAdjust(int strengthMax);
 };
 
 #endif

@@ -33,7 +33,7 @@ int az;
 
 int adjustedAx;
 
-int strengthValue;
+int strengthMax;
 int strengthTwo;
 
 // Create instance of Poultrysonic
@@ -143,13 +143,13 @@ void loop()
     // Far range mode
     if (mode == mainMode)
     {
-        maxDistance = 300;
+        maxDistance = 75;
 
         // Returns distance from the ultrasonic sensor in cm
         distance = ps.getDistance(maxDistance);
 
         // Vibrates the motors for the distance amount
-        vib.vibrate(distance, maxDistance, strengthValue);
+        vib.vibrate(distance, maxDistance, strengthMax);
 
         // Prints the distance in the Serial Monitor
         Serial.print("Distance: ");
@@ -167,7 +167,7 @@ void loop()
         distance = ps.getDistance(maxDistance);
 
         // Vibrates the motors for the distance amount
-        vib.vibrate(distance, maxDistance, strengthValue);
+        vib.vibrate(distance, maxDistance, strengthMax);
 
         // Prints the distance in the Serial Monitor
         Serial.print("Distance: ");
@@ -186,7 +186,7 @@ void loop()
             adjustedAx = ax + 80;
             strengthTwo = map(adjustedAx, 150, 0, 220, 0);
             vib.vibrateAdjust(strengthTwo);
-            strengthValue = strengthTwo;
+            strengthMax = strengthTwo;
         }
         // Pulse twice to confirm selection
         vib.vibrateAdjust(0);
