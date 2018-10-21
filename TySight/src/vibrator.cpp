@@ -1,13 +1,25 @@
 #include <vibrator.h>
+#include <constants.h>
 
-Vibrator::Vibrator(int analogOutPin)
+Vibrator::Vibrator(int analogOutPinOne, int analogOutPinTwo)
 {
-    this->analogOutPin = analogOutPin;
+    this->analogOutPinOne = analogOutPinOne;
+    this->analogOutPinTwo = analogOutPinTwo;
 }
 
-void Vibrator::vibrate(int distance)
+void Vibrator::vibrate(int distance, int maxDistance)
 {
-    // creates a strength value for analog output
-    int strength = map(distance, 0, 100, 153, 0);
-    analogWrite(analogOutPin, strength);
+    // creates a strength value for analog output 154
+    int strength = map(distance, 0, maxDistance, 154, 0);
+    analogWrite(analogOutPinOne, strength);
+    analogWrite(analogOutPinTwo, strength);
+    Serial.print("Strength: ");
+    Serial.println(strength);
+}
+
+void Vibrator::vibrateAdjust(int strength)
+{
+    // Runs the motors at the given strength
+    analogWrite(analogOutPinOne, strength);
+    analogWrite(analogOutPinTwo, strength);
 }

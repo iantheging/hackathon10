@@ -1,4 +1,7 @@
 #include <Arduino.h>
+#include <temperature.h>
+#include <constants.h>
+
 
 #ifndef POULTRYSONIC_H
 #define POULTRYSONIC_H
@@ -11,24 +14,28 @@ class Poultrysonic
     // defines variables
     long duration;
     int distance;
-    int count = 0;
+    int count;
     int distanceArr[10];
     int avgDist;
     int trigPin;
     int echoPin;
     float temperature;
     float speedOfSound;
+    int lastDistance;
+    
 
   public:
     
+
     // constructor
     Poultrysonic(int trigPin, int echoPin, float temperature);
 
     // calculates the distance in centimeters
-    int getDistance();
+    int getDistance(int maxDistance);
 
-    // checks to ensure that distance is not outlier
-    void errorCheck();
+    // Ensures data stays within the confined parameters
+    void errorAvoid(int maxDistance);
+
 };
 
 #endif
