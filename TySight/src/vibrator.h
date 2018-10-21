@@ -15,7 +15,7 @@ class Vibrator
 
     Vibrator(int analogOutPinOne, int analogOutPinTwo);
 
-    void vibrate(int distance, int maxDistance);
+    void vibrate(int distance, int maxDistance, int strengthValue);
 
     void vibrateAdjust(int strengthValue);
 };

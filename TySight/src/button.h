@@ -5,11 +5,14 @@ class Button
 {
   private:
     int buttonData;
+    int buttonDataTwo;
     int buttonState;
+    int buttonStateTwo;
+    int calibrated = 0;
 
   public:
 
-    Button(int buttonData);
+    Button(int buttonData, int buttonDataTwo);
 
     int getButtonPress();
 };

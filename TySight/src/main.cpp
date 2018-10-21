@@ -15,6 +15,7 @@ int mode = 0;
 int mainMode = 0;
 int modeOne = 1;
 int modeTwo = 2;
+int alarmMode = 3;
 
 int toggle = 1;
 int buttonHold = 2;
@@ -24,11 +25,16 @@ int maxDistance = 300;
 
 int buttonPress;
 
+int arr[10];
+
 int ax;
 int ay;
 int az;
 
-int adjustedAy;
+int adjustedAx;
+
+int strengthValue;
+int strengthTwo;
 
 // Create instance of Poultrysonic
 Poultrysonic ps(TRIG_PIN, ECHO_PIN, temperature);
@@ -40,7 +46,7 @@ Vibrator vib(ANALOG_OUT_ONE, ANALOG_OUT_TWO);
 Temperature temp(DATA_PIN, DEAD_PIN);
 
 // Create instance of Button
-Button butt(BUTTON_DATA);
+Button butt(BUTTON_DATA, BUTTONTWO);
 
 void setup()
 {
@@ -58,6 +64,12 @@ void setup()
     // Set button pin direction
     pinMode(BUTTON_DATA, INPUT);
 
+    // initialize the pushbutton pin 4 as an input:
+    pinMode(BUTTONTWO, INPUT);
+
+    // Set buzzer - pin 11 as an output
+    pinMode(BUZZER_PIN, OUTPUT);
+
     Serial.begin(9600); // Starts the serial communication
 
     // Poll initial temperature once
@@ -68,6 +80,22 @@ void loop()
 {
     // Retrieve current button press (if any)
     buttonPress = butt.getButtonPress();
+
+    if (buttonPress == alarmMode)
+    {
+        while (1)
+        {
+            // Sound the alarm
+            tone(BUZZER_PIN, 1000); // Send 1KHz sound signal...
+            delay(500);        // ...for 1/2 sec
+            noTone(BUZZER_PIN);     // Stop sound...
+            delay(200);        // ...for 1/2 sec
+            tone(BUZZER_PIN, 1500); // Send 1.5KHz sound signal...
+            delay(500); // For 1/2 seond
+            noTone(BUZZER_PIN);     // Stop sound...
+            delay(200);        // ...for 1/2 sec
+        }
+    }
 
     // Toggle mode of system based upon a button press
     // If no button press
@@ -121,7 +149,7 @@ void loop()
         distance = ps.getDistance(maxDistance);
 
         // Vibrates the motors for the distance amount
-        vib.vibrate(distance, maxDistance);
+        vib.vibrate(distance, maxDistance, strengthValue);
 
         // Prints the distance in the Serial Monitor
         Serial.print("Distance: ");
@@ -139,7 +167,7 @@ void loop()
         distance = ps.getDistance(maxDistance);
 
         // Vibrates the motors for the distance amount
-        vib.vibrate(distance, maxDistance);
+        vib.vibrate(distance, maxDistance, strengthValue);
 
         // Prints the distance in the Serial Monitor
         Serial.print("Distance: ");
@@ -156,13 +184,21 @@ void loop()
             delay(100);
             MMA7660.getValues(&ax, &ay, &az);
             adjustedAx = ax + 80;
-            int strengthTwo = map(adjustedAx, 150, 0, 220, 50);
+            strengthTwo = map(adjustedAx, 150, 0, 220, 0);
             vib.vibrateAdjust(strengthTwo);
-            Serial.print("Strength: ");
-            Serial.println(strengthTwo);
-            Serial.print("Adjusted: ");
-            Serial.println(adjustedAx);
+            strengthValue = strengthTwo;
         }
+        // Pulse twice to confirm selection
+        vib.vibrateAdjust(0);
+        delay(500);
+        vib.vibrateAdjust(220);
+        delay(700);
+        vib.vibrateAdjust(0);
+        delay(300);
+        vib.vibrateAdjust(220);
+        delay(700);
+        vib.vibrateAdjust(0);
+        delay(300);
         MMA7660.wireKill();
     }
 }

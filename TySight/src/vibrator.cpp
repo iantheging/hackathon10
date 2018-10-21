@@ -7,14 +7,12 @@ Vibrator::Vibrator(int analogOutPinOne, int analogOutPinTwo)
     this->analogOutPinTwo = analogOutPinTwo;
 }
 
-void Vibrator::vibrate(int distance, int maxDistance)
+void Vibrator::vibrate(int distance, int maxDistance, int strengthValue)
 {
     // creates a strength value for analog output 154
-    int strength = map(distance, 0, maxDistance, 154, 0);
+    int strength = map(distance, 0, maxDistance, strengthValue, 0);
     analogWrite(analogOutPinOne, strength);
     analogWrite(analogOutPinTwo, strength);
-    Serial.print("Strength: ");
-    Serial.println(strength);
 }
 
 void Vibrator::vibrateAdjust(int strength)

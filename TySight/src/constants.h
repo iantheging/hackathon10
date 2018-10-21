@@ -5,6 +5,8 @@
 const int TRUE = 1;
 const int FALSE = 0;
 
+const int BUZZER_PIN = 11;
+
 // defines Poultrysonic pins
 const int TRIG_PIN = 9;
 const int ECHO_PIN = 10;
@@ -20,5 +22,7 @@ const int ANALOG_OUT_TWO = 6;
 // defines button pins
 const int BUTTON_DATA = 2;
 const int BUTTON_DEAD = 3;
+
+const int BUTTONTWO = 4;
 
 #endif

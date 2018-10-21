@@ -1,10 +1,12 @@
 #include <Arduino.h>
 #include <temperature.h>
 #include <constants.h>
+#include <stdlib.h>
 
 
 #ifndef POULTRYSONIC_H
 #define POULTRYSONIC_H
+
 
 class Poultrysonic
 {
@@ -15,13 +17,17 @@ class Poultrysonic
     long duration;
     int distance;
     int count;
-    int distanceArr[10];
+    int distanceSum;
     int avgDist;
     int trigPin;
     int echoPin;
     float temperature;
     float speedOfSound;
     int lastDistance;
+    int currentDistance;
+    int distanceArr[3];
+
+
     
 
   public:
